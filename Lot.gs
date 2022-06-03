@@ -3,15 +3,21 @@ class Lot {
     this.elems = elems;
   }
 
-  getRandomElement(num) {
-    
+  getRandomElements(num) {
+    let array = [];
+    const exps = this.getExceptionIndexArray();
+    const resultIndexes = Lot.getRandomIntegerArray(0, this.elems.length - 1, exps);
+
+    for (let i = 0; i < resultIndexes.length; i++) {
+      array.push(elems[resultIndexes[i]]);
+    }
   }
 
-  getExceptions() {
-    let exceptions = new Array();
-    for (let i = 0; i < elems.length; i++) {
-      if (elems[i].status == Status.excluded || elems[i].status == Status.marked) {
-        exceptions.push(elems[i]);
+  getExceptionIndexArray() {
+    let exceptions = [];
+    for (let i = 0; i < this.elems.length; i++) {
+      if (this.elems[i].status == Status.excluded || this.elems[i].status == Status.marked) {
+        exceptions.push(i);
       }
     }
     return exceptions;
@@ -21,15 +27,15 @@ class Lot {
     return Math.random() * (max - min) + min;
   }
 
-  static getRandomIntegerArray(min, max, amount, exception) {
-    if (max - min < amount - exception.length) {
+  static getRandomIntegerArray(min, max, amount, exceptions) {
+    if (max - min < amount - exceptions.length) {
       throw new Error("与えられた値が不正です");
     }
     
-    let array = new Array();
+    let array = [];
     for (let i = 0; i < amount; i++) {
       let n = Lot.getRandomInteger(min, max);
-      if (!exception.includes(n) && !array.includes(n)) {
+      if (!exceptions.includes(n) && !array.includes(n)) {
         array.push(n);
       } else {
         i--;

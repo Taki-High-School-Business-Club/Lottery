@@ -30,3 +30,21 @@ function test_element_parse() {
     console.log("error");
   }
 }
+
+function test_lot() {
+  let elem = new Element("hoge", 1, Status.unMarked);
+  let elem4 = new Element("hoge2", 5, Status.unMarked);
+  let elem5 = new Element("hoge3", 17, Status.unMarked);
+  let elem2 = new Element("fuga", 2, Status.marked);
+  let elem3 = new Element("piyo", 3, Status.excluded);
+
+  let elems = [elem, elem2, elem3, elem4, elem5];
+
+  let lot = new Lot(elems);
+
+  let res = lot.getRandomElements();
+
+  for (let i = 0; i < res.length; i++) {
+    console.log(res[i]);
+  }
+}
