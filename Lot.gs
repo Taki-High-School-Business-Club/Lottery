@@ -6,11 +6,13 @@ class Lot {
   getRandomElements(num) {
     let array = [];
     const exps = this.getExceptionIndexArray();
-    const resultIndexes = Lot.getRandomIntegerArray(0, this.elems.length - 1, exps);
+    const resultIndexes = Lot.getRandomIntegerArray(0, this.elems.length - 1, num, exps);
 
     for (let i = 0; i < resultIndexes.length; i++) {
-      array.push(elems[resultIndexes[i]]);
+      array.push(this.elems[resultIndexes[i]]);
     }
+
+    return array;
   }
 
   getExceptionIndexArray() {
@@ -24,13 +26,16 @@ class Lot {
   }
 
   static getRandomInteger(min, max) {
-    return Math.random() * (max - min) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max) + 1;
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
-  static getRandomIntegerArray(min, max, amount, exceptions) {
+  static getRandomIntegerArray(min, max, amount, exceptions) {  
     if (max - min < amount - exceptions.length) {
       throw new Error("与えられた値が不正です");
     }
+    
     
     let array = [];
     for (let i = 0; i < amount; i++) {
