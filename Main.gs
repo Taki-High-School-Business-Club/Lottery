@@ -2,6 +2,10 @@ function main() {
   
 }
 
+function doPost(data) {
+  
+}
+
 function test_element_build() {
   let elem = new Element("hoge", 1, Status.unMarked);
   console.log(elem.build());
@@ -42,7 +46,7 @@ function test_lot() {
 
   let lot = new Lot(elems);
 
-  let res = lot.getRandomElements(3);
+  let res = lot.getRandomElements(5);
 
   for (let i = 0; i < res.length; i++) {
     console.log(res[i].name);

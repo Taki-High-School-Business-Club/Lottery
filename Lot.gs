@@ -32,11 +32,10 @@ class Lot {
   }
 
   static getRandomIntegerArray(min, max, amount, exceptions) {  
-    if (max - min < amount - exceptions.length) {
+    if (max - min - exceptions.length + 1 < amount) {
       throw new Error("与えられた値が不正です");
     }
-    
-    
+       
     let array = [];
     for (let i = 0; i < amount; i++) {
       let n = Lot.getRandomInteger(min, max);
